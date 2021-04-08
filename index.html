@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text">
+</body>
+<script>
+  const worker = new Worker('./index.js')
+  const input = document.querySelector('input')
+  input.onchange = e => {
+    worker.postMessage(e.target.value)
+  }
+
+  worker.onmessage = e => {
+    alert('我接收到了从worker发回来的值' + e.data)
+  }
+</script>
+</html>
